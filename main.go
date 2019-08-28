@@ -3,7 +3,7 @@
 package main
 
 import (
-	"encoding/json"
+	"github.com/json-iterator/go"
 	"log"
 	"math/rand"
 	"os"
@@ -21,6 +21,8 @@ import (
 
 var cfg proxy.Config
 var backend *storage.RedisClient
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 func startProxy() {
 	s := proxy.NewProxy(&cfg, backend)
