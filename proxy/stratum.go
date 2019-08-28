@@ -3,7 +3,7 @@ package proxy
 import (
 	"bufio"
 	"crypto/tls"
-	"encoding/json"
+	"github.com/json-iterator/go"
 	"errors"
 	"io"
 	"log"
@@ -12,6 +12,8 @@ import (
 
 	"github.com/sammy007/open-ethereum-pool/util"
 )
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 const (
 	MaxReqSize = 1024
