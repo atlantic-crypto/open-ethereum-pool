@@ -1,7 +1,7 @@
 package api
 
 import (
-	"encoding/json"
+	"github.com/json-iterator/go"
 	"log"
 	"net/http"
 	"sort"
@@ -15,6 +15,8 @@ import (
 	"github.com/sammy007/open-ethereum-pool/storage"
 	"github.com/sammy007/open-ethereum-pool/util"
 )
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type ApiConfig struct {
 	Enabled              bool   `json:"enabled"`
