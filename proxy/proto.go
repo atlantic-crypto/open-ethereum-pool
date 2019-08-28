@@ -1,6 +1,8 @@
 package proxy
 
-import "encoding/json"
+import "github.com/json-iterator/go"
+
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type JSONRpcReq struct {
 	Id     json.RawMessage `json:"id"`
