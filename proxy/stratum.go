@@ -72,7 +72,7 @@ func (s *ProxyServer) ListenTCP() {
 }
 
 func (s *ProxyServer) handleTCPClient(cs *Session) error {
-	cs.enc = jsonI.NewEncoder(cs.conn)
+	cs.enc = json.NewEncoder(cs.conn)
 	connbuff := bufio.NewReaderSize(cs.conn, MaxReqSize)
 	s.setDeadline(cs.conn)
 
