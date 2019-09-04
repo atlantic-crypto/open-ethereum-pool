@@ -48,6 +48,7 @@ func startNewrelic() {
 	if cfg.NewrelicEnabled {
 		nrConfig := newrelic.NewConfig(cfg.NewrelicName, cfg.NewrelicKey)
 		nr, err := newrelic.NewApplication(nrConfig)
+		nr.Run()
 	}
 }
 
