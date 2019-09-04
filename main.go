@@ -11,7 +11,7 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/yvasiyarov/gorelic"
+	"github.com/newrelic/go-agent"
 
 	"github.com/sammy007/open-ethereum-pool/api"
 	"github.com/sammy007/open-ethereum-pool/payouts"
@@ -46,11 +46,8 @@ func startPayoutsProcessor() {
 
 func startNewrelic() {
 	if cfg.NewrelicEnabled {
-		nr := gorelic.NewAgent()
-		nr.Verbose = cfg.NewrelicVerbose
-		nr.NewrelicLicense = cfg.NewrelicKey
-		nr.NewrelicName = cfg.NewrelicName
-		nr.Run()
+		nrConfig := newrelic.NewConfig(cfg.NewrelicName, cfg.Newrelickey)
+		nr, err := newrelic.NewApplication(nrConfig)
 	}
 }
 
