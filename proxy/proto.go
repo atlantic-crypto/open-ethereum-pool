@@ -1,7 +1,5 @@
 package proxy
 
-import "encoding/json"
-
 type JSONRpcReq struct {
 	Id     json.RawMessage `json:"id"`
 	Method string          `json:"method"`
