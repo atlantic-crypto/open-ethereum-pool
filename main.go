@@ -46,7 +46,7 @@ func startPayoutsProcessor() {
 
 func startNewrelic() {
 	if cfg.NewrelicEnabled {
-		nrConfig := newrelic.NewConfig(cfg.NewrelicName, cfg.Newrelickey)
+		nrConfig := newrelic.NewConfig(cfg.NewrelicName, cfg.NewrelicKey)
 		nr, err := newrelic.NewApplication(nrConfig)
 	}
 }
