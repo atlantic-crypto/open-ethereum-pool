@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"crypto/tls"
 	"github.com/json-iterator/go"
+	"encoding/json"
 	"errors"
 	"io"
 	"log"
@@ -13,7 +14,7 @@ import (
 	"github.com/sammy007/open-ethereum-pool/util"
 )
 
-var json = jsoniter.ConfigCompatibleWithStandardLibrary
+var json_i = jsoniter.ConfigCompatibleWithStandardLibrary
 
 const (
 	MaxReqSize = 1024
@@ -71,7 +72,7 @@ func (s *ProxyServer) ListenTCP() {
 }
 
 func (s *ProxyServer) handleTCPClient(cs *Session) error {
-	cs.enc = json.NewEncoder(cs.conn)
+	cs.enc = json_i.NewEncoder(cs.conn)
 	connbuff := bufio.NewReaderSize(cs.conn, MaxReqSize)
 	s.setDeadline(cs.conn)
 
@@ -92,7 +93,7 @@ func (s *ProxyServer) handleTCPClient(cs *Session) error {
 
 		if len(data) > 1 {
 			var req StratumReq
-			err = json.Unmarshal(data, &req)
+			err = json_i.Unmarshal(data, &req)
 			if err != nil {
 				s.policy.ApplyMalformedPolicy(cs.ip)
 				log.Printf("Malformed stratum request from %s: %v", cs.ip, err)
@@ -113,7 +114,7 @@ func (cs *Session) handleTCPMessage(s *ProxyServer, req *StratumReq) error {
 	switch req.Method {
 	case "eth_submitLogin":
 		var params []string
-		err := json.Unmarshal(req.Params, &params)
+		err := json_i.Unmarshal(req.Params, &params)
 		if err != nil {
 			log.Println("Malformed stratum request params from", cs.ip)
 			return err
@@ -131,7 +132,7 @@ func (cs *Session) handleTCPMessage(s *ProxyServer, req *StratumReq) error {
 		return cs.sendTCPResult(req.Id, &reply)
 	case "eth_submitWork":
 		var params []string
-		err := json.Unmarshal(req.Params, &params)
+		err := json_i.Unmarshal(req.Params, &params)
 		if err != nil {
 			log.Println("Malformed stratum request params from", cs.ip)
 			return err
