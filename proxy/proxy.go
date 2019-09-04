@@ -2,6 +2,7 @@ package proxy
 
 import (
 	"encoding/json"
+	"github.com/json-iterator/go"
 	"io"
 	"log"
 	"net"
@@ -18,6 +19,8 @@ import (
 	"github.com/sammy007/open-ethereum-pool/storage"
 	"github.com/sammy007/open-ethereum-pool/util"
 )
+
+var jsonI = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type ProxyServer struct {
 	config             *Config
@@ -194,7 +197,7 @@ func (s *ProxyServer) handleClient(w http.ResponseWriter, r *http.Request, ip st
 	defer r.Body.Close()
 
 	cs := &Session{ip: ip, enc: json.NewEncoder(w)}
-	dec := json.NewDecoder(r.Body)
+	dec := jsonI.NewDecoder(r.Body)
 	for {
 		var req JSONRpcReq
 		if err := dec.Decode(&req); err == io.EOF {
@@ -241,7 +244,7 @@ func (cs *Session) handleMessage(s *ProxyServer, r *http.Request, req *JSONRpcRe
 	case "eth_submitWork":
 		if req.Params != nil {
 			var params []string
-			err := json.Unmarshal(req.Params, &params)
+			err := jsonI.Unmarshal(req.Params, &params)
 			if err != nil {
 				log.Printf("Unable to parse params from %v", cs.ip)
 				s.policy.ApplyMalformedPolicy(cs.ip)
