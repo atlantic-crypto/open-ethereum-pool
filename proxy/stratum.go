@@ -14,7 +14,6 @@ import (
 	"github.com/sammy007/open-ethereum-pool/util"
 )
 
-var jsonI = jsoniter.ConfigCompatibleWithStandardLibrary
 
 const (
 	MaxReqSize = 1024
