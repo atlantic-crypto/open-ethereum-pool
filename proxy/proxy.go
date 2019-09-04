@@ -1,7 +1,7 @@
 package proxy
 
 import (
-	"encoding/json"
+	"github.com/json-iterator/go"
 	"io"
 	"log"
 	"net"
