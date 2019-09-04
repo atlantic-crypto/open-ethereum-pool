@@ -19,6 +19,8 @@ import (
 	"github.com/sammy007/open-ethereum-pool/util"
 )
 
+var json = jsoniter.ConfigCompatibleWithStandardLibrary
+
 type ProxyServer struct {
 	config             *Config
 	blockTemplate      atomic.Value
