@@ -1,7 +1,7 @@
 package proxy
 
 import (
-	"github.com/json-iterator/go"
+	"encoder/json"
 	"io"
 	"log"
 	"net"
@@ -18,8 +18,6 @@ import (
 	"github.com/sammy007/open-ethereum-pool/storage"
 	"github.com/sammy007/open-ethereum-pool/util"
 )
-
-var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type ProxyServer struct {
 	config             *Config
