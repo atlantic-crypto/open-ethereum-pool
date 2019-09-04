@@ -3,7 +3,6 @@ package proxy
 import (
 	"bufio"
 	"crypto/tls"
-	"github.com/json-iterator/go"
 	"encoding/json"
 	"errors"
 	"io"
