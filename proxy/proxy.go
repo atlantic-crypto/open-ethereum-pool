@@ -1,7 +1,7 @@
 package proxy
 
 import (
-	"encoder/json"
+	"encoding/json"
 	"io"
 	"log"
 	"net"
