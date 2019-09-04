@@ -3,7 +3,7 @@ package rpc
 import (
 	"bytes"
 	"crypto/sha256"
-	"github.com/json-iterator/go"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"math/big"
@@ -16,8 +16,6 @@ import (
 
 	"github.com/sammy007/open-ethereum-pool/util"
 )
-
-var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type RPCClient struct {
 	sync.RWMutex
